@@ -4,6 +4,7 @@ import apple from '../../images/images.png'
 import google from '../../images/Get_it_on_Google_play.png'
 import insta from '../../images/Screen-Shot-2018-10-05-at-2.09.37-pm.png'
 import validator from "@brocode/simple-react-form-validation-helper";
+import { useNavigate } from 'react-router-dom';
 
 
 function Register() {
@@ -17,6 +18,7 @@ function Register() {
     const [userNameError, setuserNameError] = useState('')
     const [password, setpassword] = useState('')
     const [passwordError, setpasswordError] = useState('')
+    const navigate =  useNavigate()
     return (
         <div className='row'>
             <div className="col-md-6 hidden md:block ">
@@ -35,7 +37,7 @@ function Register() {
                                 </p>
                             </div>
                             <div className='mb-3 '>
-                                <button className="block rounded bg-blue-500 w-72 h-8 text-ellipsis items-center-center">Login with Facebook</button>
+                                <button className="block rounded bg-blue-500 w-72 h-8 text-ellipsis items-center-center text-white">Login with Facebook</button>
                             </div>
                             <div className='flex justify-center '>
                                 <div className='col-md-5'>
@@ -100,7 +102,7 @@ function Register() {
 
                             </div>
                             <div className='mb-3'  >
-                                <button className="block rounded bg-sky-600 w-72 h-8 text-ellipsis items-center-center">signup</button>
+                                <button className="block rounded bg-sky-600 w-72 h-8 text-ellipsis items-center-center text-white">signup</button>
                             </div>
 
                             <div >
@@ -113,7 +115,9 @@ function Register() {
 
                     <div className='flex justify-center'>
                         <div className='text-center w-80  border mt-2 mb-3  border-slate-300'>
-                            <p className='mb-7 mt-7'>Have an account? <a href="#"  target={'_blank'}>Log in</a></p>
+                            <p className='mb-7 mt-7'>Have an account? <button className='text-blue-600 font-bold' onClick={()=>{
+                                navigate('/login')
+                            }} >Log in</button> </p>
                         </div>
                     </div>
 

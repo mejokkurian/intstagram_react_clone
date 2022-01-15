@@ -3,12 +3,17 @@ import apple from '../../images/images.png'
 import google from '../../images/Get_it_on_Google_play.png'
 import insta from '../../images/Screen-Shot-2018-10-05-at-2.09.37-pm.png'
 import validator from "@brocode/simple-react-form-validation-helper";
+import { useNavigate } from 'react-router-dom';
+import './login.css'
+
 
 function Loginuser() {
     const [email, setemail] = useState('')
     const [emailError, setemailerror] = useState('')
     const [Password, setPassword] = useState('')
     const [PasswordError, setPasswordError] = useState('')
+    const navigate  = useNavigate()
+    const [isRevealPwd, setIsRevealPwd] = useState(false);
     return (
         <div>
             <div className='row  '>
@@ -25,7 +30,7 @@ function Loginuser() {
                                 </div>
 
                                 <div className='mb-6'>
-                                    <div className="space-y-2">
+                                    <div className="space-y-2 ">
                                     <span className="text-danger text-xs">{emailError}</span>
                                         <input value={email} onChange={(e)=>{
                                           setemail(e.target.value);
@@ -36,20 +41,23 @@ function Loginuser() {
                                         }}
                                         className='border #f1f5f9 border-zinc-900 rounded h-8 w-72 pl-3 text-sm' type="text" placeholder="Email" />
                                         <span className="text-danger text-xs">{PasswordError}</span>
-                                        <input value={Password} onChange={(e)=>{
+                                        <input  value={Password} onChange={(e)=>{
                                           setPassword(e.target.value);
                                           validator.passwordInputChangeHandler(e.target.value,setPasswordError) 
                                         }}
                                         onBlur={(e)=>{
                                             validator.passwordInputBlurHandler(e.target.value,setPasswordError)
                                         }}
-                                        className='border border-zinc-900  rounded h-8 w-72 pl-3 text-sm' type="Password" placeholder="Password" />
+                                        className='border border-zinc-900   rounded h-8 w-72  text-sm' type={isRevealPwd? "password" : "text"} placeholder="Password" />
+                                        <button onClick={()=>{
+                                            setIsRevealPwd(prevState => !prevState)
+                                        }} className='border hideButton  w-8 mb-1 border-zinc-900 rounded mr-7  h-8 text-xs   absolute' >{isRevealPwd? 'show' : 'hide'}</button>
 
                                     </div>
-                                </div>
+                                </div> 
                                 
                                 <div className='mb-3'  >
-                                    <button className="block rounded bg-sky-600 w-72 h-8 text-ellipsis items-center-center">signup</button>
+                                    <button className="block rounded bg-sky-600 w-72 h-8  text-ellipsis items-center-center text-white">signup</button>
                                 </div>
 
                                 <div className='flex justify-center '>
@@ -64,7 +72,7 @@ function Loginuser() {
                                     </div>
                                 </div>
                                 <div className='text-center'>
-                                    <p className='' >Login with Facebook</p>
+                                    <p className='text-blue-700' >Login with Facebook</p>
                                 </div>
                             </div>
 
@@ -72,7 +80,8 @@ function Loginuser() {
 
                         <div className='flex justify-center'>
                             <div className='text-center w-80  border mt-2 mb-3  border-slate-300'>
-                                <p className='mb-7 mt-7'>Don't have an account? <a href="#" target={'_blank'}>Sign up</a></p>
+                                <p className='mb-7 mt-7'>Don't have an account? <button className='text-blue-600 font-bold' onClick={()=>{ navigate ('/register') }} >Sign up</button> 
+                                    </p>
                             </div>
                         </div>
 
