@@ -13,7 +13,7 @@ function Suggestions() {
                 className="flex items-center justify-between mt-1">
                 <img
                     className="w-10 h-10 rounded-full border p-[2px]"
-                    src='https://us.123rf.com/450wm/oneinchpunch/oneinchpunch1808/oneinchpunch180802187/106768246-beautiful-woman-traveling-on-her-jet.jpg?ver=6' alt="image"
+                    src='https://us.123rf.com/450wm/oneinchpunch/oneinchpunch1808/oneinchpunch180802187/106768246-beautiful-woman-traveling-on-her-jet.jpg?ver=6' alt="instagram feed"
                 />
                 <div
                     className="flex-1 ml-4">

@@ -4,18 +4,41 @@ import google from '../../images/Get_it_on_Google_play.png'
 import insta from '../../images/Screen-Shot-2018-10-05-at-2.09.37-pm.png'
 import validator from "@brocode/simple-react-form-validation-helper";
 import { useNavigate } from 'react-router-dom';
-import './login.css'
+import axios from '../axios';
+
 
 
 function Loginuser() {
-    const [email, setemail] = useState('')
+    const [username, setemail] = useState('')
     const [emailError, setemailerror] = useState('')
-    const [Password, setPassword] = useState('')
+    const [password, setPassword] = useState('')
     const [PasswordError, setPasswordError] = useState('')
     const navigate  = useNavigate()
     const [isRevealPwd, setIsRevealPwd] = useState(false);
+    let data = {username,password}
+    const formSub = async ()=>{
+      await  axios.post('UserLogin',data).then((Responce)=>{
+            console.log(Responce.data)
+            navigate('/')
+        }).catch((error)=>{
+            console.log(error.response.data)
+            setemailerror(error.response.data.error)
+        })
+
+    }
+    
+    
+
+    
+// ***************
+    
+// ***************
+
+
     return (
         <div>
+            
+            
             <div className='row  '>
                 <div className="col-md-6 hidden md:block ">
                     <img className='w-96 ml-auto mt-24' src={insta} alt="instagram feeds" />
@@ -30,34 +53,35 @@ function Loginuser() {
                                 </div>
 
                                 <div className='mb-6'>
-                                    <div className="space-y-2 ">
+                                    <div className="space-y-2 relative">
                                     <span className="text-danger text-xs">{emailError}</span>
-                                        <input value={email} onChange={(e)=>{
+                                        <input value={username} onChange={(e)=>{
                                           setemail(e.target.value);
-                                          validator.emailInputChangeHandler(e.target.value,setemailerror)  
+                                          validator.nameInputChangeHandler(e.target.value,setemailerror)  
                                         }}
                                         onBlur={(e)=>{
-                                            validator.emailInputBlurHandler(e.target.value,setemailerror)
+                                            validator.nameInputChangeHandler(e.target.value,setemailerror)
                                         }}
                                         className='border #f1f5f9 border-zinc-900 rounded h-8 w-72 pl-3 text-sm' type="text" placeholder="Email" />
                                         <span className="text-danger text-xs">{PasswordError}</span>
-                                        <input  value={Password} onChange={(e)=>{
+                                        <input  value={password} onChange={(e)=>{
                                           setPassword(e.target.value);
                                           validator.passwordInputChangeHandler(e.target.value,setPasswordError) 
                                         }}
                                         onBlur={(e)=>{
                                             validator.passwordInputBlurHandler(e.target.value,setPasswordError)
                                         }}
-                                        className='border border-zinc-900   rounded h-8 w-72  text-sm' type={isRevealPwd? "password" : "text"} placeholder="Password" />
+                                        className='border border-zinc-900     rounded h-8 w-72  text-sm' type={isRevealPwd? "password" : "text"} placeholder="Password" />
                                         <button onClick={()=>{
                                             setIsRevealPwd(prevState => !prevState)
-                                        }} className='border hideButton  w-8 mb-1 border-zinc-900 rounded mr-7  h-8 text-xs   absolute' >{isRevealPwd? 'show' : 'hide'}</button>
+                                        }} className=' right-0.5 hideButton   w-8 mb-1 border-zinc-900 rounded mr-7  h-8 text-xs   absolute' >{isRevealPwd? 'show' : 'hide'}</button>
 
                                     </div>
                                 </div> 
                                 
                                 <div className='mb-3'  >
-                                    <button className="block rounded bg-sky-600 w-72 h-8  text-ellipsis items-center-center text-white">signup</button>
+                                    <button 
+                                 className="block rounded bg-sky-600 w-72 h-8  text-ellipsis items-center-center text-white" onClick={formSub}>signup</button>
                                 </div>
 
                                 <div className='flex justify-center '>

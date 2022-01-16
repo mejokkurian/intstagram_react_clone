@@ -5,22 +5,45 @@ import google from '../../images/Get_it_on_Google_play.png'
 import insta from '../../images/Screen-Shot-2018-10-05-at-2.09.37-pm.png'
 import validator from "@brocode/simple-react-form-validation-helper";
 import { useNavigate } from 'react-router-dom';
+import axios from  '../axios'
+// import LinearProgress from '@mui/material/LinearProgress';
 
 
 function Register() {
     const [email, setemail] = useState('')
     const [emailError, setemailError] = useState('')
-    const [Phone, setPhone] = useState('')
+    const [mobile_number, setPhone] = useState('')
     const [PhoneError, setPhoneError] = useState('')
-    const [fullName, setfullName] = useState('')
+    const [first_name, setfullName] = useState('')
     const [fullNameError, setfullNameError] = useState('')
-    const [userName, setuserName] = useState('')
+    const [username, setuserName] = useState('')
     const [userNameError, setuserNameError] = useState('')
     const [password, setpassword] = useState('')
     const [passwordError, setpasswordError] = useState('')
+    const [loader, setloader] = useState(false)
     const navigate =  useNavigate()
+    let data = {email,username,mobile_number,first_name,password}
+    
+    const formSubm = async ()=>{
+
+     await axios.post('UserRegistration',data).then((Response)=>{
+            navigate('/login')
+        }).catch((error)=>{
+            if(error.response.data.email){
+                setemailError(error.response.data.email)
+        
+            }else if(error.response.data.mobile_number){
+                setPhoneError(error.response.data.mobile_number)
+            }
+            else if(error.response.data.username){
+                setuserNameError(error.response.data.username)
+            }
+        })
+    }
+ 
     return (
         <div className='row'>
+            {/* {loader && <LinearProgress variant="determinate" />} */}
             <div className="col-md-6 hidden md:block ">
                 <img className='w-96 ml-auto mt-24' src={insta} alt="instagram feeds" />
             </div>
@@ -64,7 +87,7 @@ function Register() {
                                     className='border #f1f5f9 border-zinc-900 rounded h-8 w-72 pl-3 text-sm' type="email" placeholder="Email" />
                                     <span className="text-danger text-xs">{PhoneError}</span>
                                     <input
-                                    value={Phone} onChange={(e)=>{
+                                    value={mobile_number} onChange={(e)=>{
                                         setPhone(e.target.value);
                                         validator.phoneInputChangeHandler(e.target.value,setPhoneError)
                                     }}
@@ -74,7 +97,7 @@ function Register() {
                                     className='border border-zinc-900  rounded h-8 w-72 pl-3 text-sm' type="text" placeholder="Mobile number" />
                                     <span className="text-danger text-xs">{fullNameError}</span>
                                     <input 
-                                    value={fullName} onChange={(e)=>{
+                                    value={first_name} onChange={(e)=>{
                                         setfullName(e.target.value);
                                         validator.nameInputChangeHandler(e.target.value,setfullNameError)
                                     }}
@@ -82,7 +105,7 @@ function Register() {
                                         validator.nameInputBlurHandler(e.target.value,setfullNameError)
                                     }} className='border border-zinc-900  rounded h-8 w-72 pl-3 text-sm' type="text" placeholder='Fullname' />
                                     <span className="text-danger text-xs">{userNameError}</span>
-                                    <input value={userName} onChange={(e)=>{
+                                    <input value={username} onChange={(e)=>{
                                         setuserName(e.target.value);
                                         validator.nameInputChangeHandler(e.target.value,setuserNameError)
                                     }} 
@@ -102,7 +125,7 @@ function Register() {
 
                             </div>
                             <div className='mb-3'  >
-                                <button className="block rounded bg-sky-600 w-72 h-8 text-ellipsis items-center-center text-white">signup</button>
+                                <button onClick={formSubm} className="block rounded bg-sky-600 w-72 h-8 text-ellipsis items-center-center text-white">signup</button>
                             </div>
 
                             <div >

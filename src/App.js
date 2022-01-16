@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Header } from './components';
 import { Homescreen, LoginPage, RegisterPage } from './Pages/index'
 
+
+
 const App = () => {
 
   const Layout = ({ children }) => {
@@ -26,7 +28,7 @@ const App = () => {
           <Route path='/' element={
             <Layout>
               <Homescreen />
-            </Layout>
+              </Layout>
           } />
           <Route path="*" element={<LoginPage />} />
         </Routes>

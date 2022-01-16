@@ -19,7 +19,7 @@ function Header() {
                 <div className='relative   items-center inline-grid  w-24 cursor-pointer'>
                     <img
                         src="https://links.papareact.com/ocw" layout="fill"
-                        objectFit="contain"
+                        objectfit="contain"
                     />
                 </div>
 
