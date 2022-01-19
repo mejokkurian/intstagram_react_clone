@@ -7,10 +7,28 @@ import {
     MenuIcon
 } from '@heroicons/react/outline'
 import { HomeIcon } from '@heroicons/react/solid'
-import React from 'react'
+import React, { useState } from 'react'
+import  ImageUpload  from '../modals/ImageUpload'
+
+import Discard from '../discard/Discard'
+
 
 function Header() {
+    const [fileUploaded, setfileUploaded] = useState('')
+    const [show, setShow] = useState(false);
+    console.log(fileUploaded)
+
+    // modal opening function
+    const handleShow = () => setShow(true);
+    const [discard, setDiscard] = useState(false)
+
+    // modal closing function
+    const handleClose = () => {
+        setDiscard(true)
+    }
+
     return (
+
         <div className="shadow-sm border-b bg-white sticky top-0 z-50">
             <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
 
@@ -19,7 +37,7 @@ function Header() {
                 <div className='relative   items-center inline-grid  w-24 cursor-pointer'>
                     <img
                         src="https://links.papareact.com/ocw" layout="fill"
-                        objectfit="contain"
+                        objectfit="contain" alt='My Awesome '
                     />
                 </div>
 
@@ -46,10 +64,12 @@ function Header() {
                     <PaperAirplaneIcon className="navBtn rotate-45"/>
                     <div className="absolute -top-1 -right-2 text-xs w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
                     </div>
-                    <PlusCircleIcon className="navBtn"/>
+                    <PlusCircleIcon onClick={handleShow}className="navBtn"/>
                     <UserGroupIcon className="navBtn" />
                     <HeartIcon className="navBtn" />
-                    {/* <img src="https://avatars.githubusercontent.com/u/83535061?v=4" alt="profile pic" className="h-10 rounded-full cursor-pointer w-10" /> */}
+                   
+                    <ImageUpload show = {show} hide = {handleClose} setfileUpload = {setfileUploaded} fileUpload = {fileUploaded} />
+                    {discard&&<Discard setState = {setDiscard} setfileUpload = {setfileUploaded} setshowOne = {setShow}/> } 
                 </div>
             </div>
         </div>

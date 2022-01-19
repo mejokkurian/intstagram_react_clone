@@ -19,6 +19,8 @@ function Loginuser() {
     const formSub = async ()=>{
       await  axios.post('UserLogin',data).then((Responce)=>{
             console.log(Responce.data)
+            localStorage.setItem('Token', Responce.data.access)
+            console.log( Responce.data.access)
             navigate('/')
         }).catch((error)=>{
             console.log(error.response.data)

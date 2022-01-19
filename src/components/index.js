@@ -1,3 +1,4 @@
+
 export {default as Login} from './Login/Loginuser'
 export {default as Register} from './Register/Register'
 export {default as Header} from './header/Header'
@@ -5,3 +6,6 @@ export {default as Feed} from './feed/Feed'
 export {default as Story} from './story/Story'
 export {default as Suggestions} from './suggetion/Suggestions'
 export {default as MiniProfile} from './miniprofile/MiniProfile'
+export {default as NotFound} from './not_found/NotFound'
+export {default as ImageUpload} from './modals/ImageUpload'
+export {default as Discard} from './discard/Discard'
